@@ -59,6 +59,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: InputDecoration(border: OutlineInputBorder()),
                 );
               },
+              onSelected: (value){
+                print(value.firstName);
+              },
+              optionsViewBuilder: (BuildContext context, Function onSelect,
+                  Iterable<Data> dataList) {
+                return Material(
+                  child: ListView.builder(
+                    itemCount: dataList.length,
+                    itemBuilder: (context, index) {
+                      Data data = dataList.elementAt(index);
+                      return Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: InkWell(
+                          onTap: ()=>onSelect(data),
+                          child: ListTile(
+                            title: Text(data.firstName!),
+                            leading: Image.network(
+                              data.avatar!,
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
             ),
           )
         ],
